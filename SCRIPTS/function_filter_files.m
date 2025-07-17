@@ -35,10 +35,9 @@ if isempty(cFiles) && isempty(hFiles)
     return;
 end
 
-% Create folders for .c and .h files & Reports if they don't exist
+% Create folders for .c and .h files if they don't exist
 cFolderPath = fullfile(folderPath, 'src');
 hFolderPath = fullfile(folderPath, 'include');
-Reports = fullfile(folderPath, 'Reports');
 
 if ~exist(cFolderPath, 'dir')
     mkdir(cFolderPath);
@@ -52,13 +51,6 @@ if ~exist(hFolderPath, 'dir')
 else
     % Delete existing files in .h_files folder
     delete(fullfile(hFolderPath, '*.h'));
-end
-
-if ~exist(Reports, 'dir')
-    mkdir(Reports);
-else
-    % Delete existing files in Reports folder
-    delete(fullfile(Reports));
 end
 
 % Copy all .c files (excluding 'ert_main.c') to the .c_files folder
@@ -80,12 +72,7 @@ for i = 1:length(hFiles)
 end
 
 
-html_folder=string(folderPath)+'\MCU_FOC_MAIN_ert_rtw\html'
-
-% Copy Paste html folder inside Reports
-copyfile(fullfile(html_folder),Reports,'f')
-
-disp('Files copied to src , include & Reports folders.');
+disp('Files copied to src , include folders.');
 
 % Create a zip file in the selected folder
 zipsFolderPath = fullfile(folderPath, 'zip_files');
